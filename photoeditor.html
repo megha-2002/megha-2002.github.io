@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Photoeditor</title>
+  </head>
+  <style>
+  img {
+    width: 24.5%;
+    height: auto;
+  }
+.image-container img {
+  width: 100%;
+}
+@media only screen and (min-width: 576px) and (max-width: 768px) {
+  .image-container img {
+    width: 50%;
+    float: left;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+  .image-container img {
+    width: 33.33%;
+    float: left;
+  }
+}
+@media only screen and (min-width: 992px) {
+  .image-container img {
+    width: 25%;
+    float: left;
+  }
+}
+  </style>
+  <body>
+    <h1 style = "text-align:center;"><strong>Photo Album and Editor</strong></h1>
+    <div class="image-container">
+    <img src="https://bcciplayerimages.s3.ap-south-1.amazonaws.com/playerheadshot/bcci/1000x1280/164.png" alt="">
+    <img src="https://bcciplayerimages.s3.ap-south-1.amazonaws.com/playerheadshot/bcci/1000x1280/107.png" alt="">
+    <img src="https://bcciplayerimages.s3.ap-south-1.amazonaws.com/playerheadshot/bcci/1000x1280/1124.png" alt="">
+    <img src="https://bcciplayerimages.s3.ap-south-1.amazonaws.com/playerheadshot/bcci/1000x1280/8.png" alt="">
+    <br>
+    <img src="https://bcciplayerimages.s3.ap-south-1.amazonaws.com/playerheadshot/bcci/1000x1280/1125.png" alt="">
+    <img src="https://bcciplayerimages.s3.ap-south-1.amazonaws.com/playerheadshot/bcci/1000x1280/9.png" alt="">
+    <img src="https://bcciplayerimages.s3.ap-south-1.amazonaws.com/playerheadshot/bcci/1000x1280/94.png" alt="">
+    <img src="https://bcciplayerimages.s3.ap-south-1.amazonaws.com/playerheadshot/bcci/1000x1280/2972.png" alt="">
+    <br>
+    <img src="https://bcciplayerimages.s3.ap-south-1.amazonaws.com/playerheadshot/bcci/1000x1280/156.png" alt="">
+    <img src="https://bcciplayerimages.s3.ap-south-1.amazonaws.com/playerheadshot/bcci/1000x1280/135.png" alt="">
+    <img src="https://bcciplayerimages.s3.ap-south-1.amazonaws.com/playerheadshot/bcci/1000x1280/1113.png" alt="">
+    <img src="https://bcciplayerimages.s3.ap-south-1.amazonaws.com/playerheadshot/bcci/1000x1280/1745.png" alt="">
+    <br>
+    <img src="https://bcciplayerimages.s3.ap-south-1.amazonaws.com/playerheadshot/bcci/1000x1280/1563.png" alt="">
+    <img src="https://bcciplayerimages.s3.ap-south-1.amazonaws.com/playerheadshot/bcci/1000x1280/3840.png" alt="">
+    <img src="https://bcciplayerimages.s3.ap-south-1.amazonaws.com/playerheadshot/bcci/1000x1280/38.png" alt="">
+    <img src="https://bcciplayerimages.s3.ap-south-1.amazonaws.com/playerheadshot/bcci/1000x1280/41.png" alt="">
+  </div>
+    <h3>Upload your image:</h3>
+    <p><input type="file"  accept="image/*" name="image" id="file"  onchange="loadFile(event)", style="display: none;"></p>
+<p><label for="file" style="border: 2px solid black">Browse image</label></p>
+    <p><img id="output" width="300" /></p>
+    <button onclick="convertToGrayscale()">Grayscale</button>
+    <button onclick="addReddishTint()">Reddish</button>
+    <button onclick="addGreenishTint()">Greenish</button>
+    <button onclick="addBlueishTint()">Blueish</button>
+    <br>
+    <p><input type="range" min="0" max="200" value="100" class="slider" id="brightness-slider">brightness-slider</p>
+    <button onclick="reduceResolution()">Reduce Resolution</button>
+
+<script>
+var loadFile = function(event) {
+	var image = document.getElementById('output');
+	image.src = URL.createObjectURL(event.target.files[0]);
+};
+
+		function convertToGrayscale() {
+			var img = document.getElementById("output");
+			var canvas = document.createElement("canvas");
+			canvas.width = img.width;
+			canvas.height = img.height;
+			var ctx = canvas.getContext("2d");
+			ctx.drawImage(img, 0, 0);
+			var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+			for (var i = 0; i < imageData.data.length; i += 4) {
+				var r = imageData.data[i];
+				var g = imageData.data[i + 1];
+				var b = imageData.data[i + 2];
+				var gray = (r + g + b) / 3;
+				imageData.data[i] = gray;
+				imageData.data[i + 1] = gray;
+				imageData.data[i + 2] = gray;
+			}
+			ctx.putImageData(imageData, 0, 0);
+			img.src = canvas.toDataURL();
+		}
+
+    		function addReddishTint() {
+    			var img = document.getElementById("output");
+    			var canvas = document.createElement("canvas");
+    			canvas.width = img.width;
+    			canvas.height = img.height;
+    			var ctx = canvas.getContext("2d");
+    			ctx.drawImage(img, 0, 0);
+    			var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    			for (var i = 0; i < imageData.data.length; i += 4) {
+    				var r = imageData.data[i];
+    				var g = imageData.data[i + 1];
+    				var b = imageData.data[i + 2];
+    				r = Math.min(r + 50, 255);
+    				imageData.data[i] = r;
+    				imageData.data[i + 1] = g;
+    				imageData.data[i + 2] = b;
+    			}
+    			ctx.putImageData(imageData, 0, 0);
+    			img.src = canvas.toDataURL();
+    		}
+
+        function addGreenishTint() {
+    			var img = document.getElementById("output");
+    			var canvas = document.createElement("canvas");
+    			canvas.width = img.width;
+    			canvas.height = img.height;
+    			var ctx = canvas.getContext("2d");
+    			ctx.drawImage(img, 0, 0);
+    			var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    			for (var i = 0; i < imageData.data.length; i += 4) {
+    				var r = imageData.data[i];
+    				var g = imageData.data[i + 1];
+    				var b = imageData.data[i + 2];
+    				g = Math.min(g + 50, 255);
+    				imageData.data[i] = r;
+    				imageData.data[i + 1] = g;
+    				imageData.data[i + 2] = b;
+    			}
+    			ctx.putImageData(imageData, 0, 0);
+    			img.src = canvas.toDataURL();
+    		}
+
+        function addBlueishTint() {
+    			var img = document.getElementById("output");
+    			var canvas = document.createElement("canvas");
+    			canvas.width = img.width;
+    			canvas.height = img.height;
+    			var ctx = canvas.getContext("2d");
+    			ctx.drawImage(img, 0, 0);
+    			var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    			for (var i = 0; i < imageData.data.length; i += 4) {
+    				var r = imageData.data[i];
+    				var g = imageData.data[i + 1];
+    				var b = imageData.data[i + 2];
+    				b = Math.min(b + 50, 255);
+    				imageData.data[i] = r;
+    				imageData.data[i + 1] = g;
+    				imageData.data[i + 2] = b;
+    			}
+    			ctx.putImageData(imageData, 0, 0);
+    			img.src = canvas.toDataURL();
+    		}
+
+        var slider = document.getElementById("brightness-slider");
+        var image = document.getElementById("output");
+
+        slider.oninput = function() {
+          image.style.filter = "brightness(" + this.value + "%)";
+        }
+
+  function reduceResolution() {
+  var image = document.getElementById("output");
+  var canvas = document.createElement("canvas");
+  var ctx = canvas.getContext("2d");
+  canvas.width = image.width / 2;
+  canvas.height = image.height / 2;
+  ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+  image.src = canvas.toDataURL();
+}
+</script>
+  </body>
+</html>
