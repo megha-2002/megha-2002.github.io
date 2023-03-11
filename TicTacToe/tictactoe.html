@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Tictactoe-index-page</title>
+	<style>
+		body {
+			font-family: Times NewRoman;
+			background-image: url("https://thumbs.dreamstime.com/b/web-tic-tac-toe-game-texture-hand-drawn-seamless-cross-shapes-pattern-black-elements-white-background-228701531.jpg");
+			margin: 0;
+			padding: 0;
+		}
+
+		.container {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			height: 100vh;
+		}
+
+		.button {
+			display: inline-block;
+			background-color: #007bff;
+			color: #fff;
+			border: none;
+			padding: 10px 20px;
+			font-size: 18px;
+			font-weight: bold;
+			border-radius: 5px;
+			margin: 10px;
+			cursor: pointer;
+			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+			transition: background-color 0.3s ease;
+		}
+
+		.button:hover {
+			background-color: #0062cc;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<h1 style="background-color:#fff">TIC-TAC-TOE GAME</h1>
+		<p style="background-color:#fff"><button class="button" ><a href="./tictactoe-single.html">SINGLE PLAYER</a></button></p>
+		<p style="background-color:#fff"><button class="button" ><a href="./tictactoe-double.html">DOUBLE PLAYER</a></button></p>
+	</div>
+</body>
+</html>
