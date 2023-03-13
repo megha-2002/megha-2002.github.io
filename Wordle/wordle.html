@@ -1,26 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Wordle</title>
-    <!-- Google Font -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap"
-      rel="stylesheet"
-    />
-    <!-- Stylesheet -->
-    <link rel="stylesheet" href="wordle.css" />
-  </head>
-  <body>
-    <div class="wrapper">
-      <div class="container"></div>
-      <div class="rules">
-        <img src="rules.svg" />
-      </div>
-      <div class="win-screen hide"></div>
-    </div>
-    <button class="submit hide">Submit</button>
-    <!-- Script -->
-    <script src="wordle.js"></script>
-  </body>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Wordle</title>
+	<link rel="stylesheet" href="wordle.css">
+</head>
+<body>
+  <br>
+  <br>
+	<h1 style="background-color:#fff">Wordle</h1>
+	<br>
+  <br>
+  <br>
+  <br>
+  <div id="word-container">
+		<div class="word-box"></div>
+		<div class="word-box"></div>
+		<div class="word-box"></div>
+		<div class="word-box"></div>
+		<div class="word-box"></div>
+	</div>
+	<div id="guess-container">
+		<input type="text" id="guess-input">
+		<button id="guess-button">Guess</button>
+		<p><h3 style="background-color:#fff">Hint: These are Countries</h3></p>
+	</div>
+	<script src="wordle.js"></script>
+</body>
 </html>
